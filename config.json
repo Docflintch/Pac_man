@@ -1,0 +1,45 @@
+# Pac-Man configuration file
+# Lines starting with '#' or '//' are comments, /* blocks */ too.
+# Every missing or invalid value is replaced by its default (see README).
+{
+    # file where the top 10 is saved (relative to this config file)
+    "highscore_filename": "scores_board.json",
+
+    # lives at the start of the game (1..99)
+    "lives": 3,
+
+    # points (0..100000)
+    "points_per_pacgum": 10,
+    "points_per_super_pacgum": 50,
+    "points_per_ghost": 200,
+
+    # seed of the first level (the next levels are random)
+    "seed": 42,
+
+    # time limit of each level in seconds (10..3600)
+    "level_max_time": 90,
+
+    // speeds in tiles per second (1..100)
+    "pacman_speed": 10,
+    "ghost_speed": 7.5,
+
+    /* seconds the ghosts stay edible after a super pacgum,
+       and seconds before an eaten ghost comes back in its corner */
+    "frightened_time": 7,
+    "ghost_respawn_time": 5,
+
+    # at least 10 levels, size of the maze in cells (8..30)
+    # a level can also have its own "seed"
+    "levels": [
+        {"width": 18, "height": 18},
+        {"width": 18, "height": 18},
+        {"width": 18, "height": 18},
+        {"width": 18, "height": 18},
+        {"width": 18, "height": 18},
+        {"width": 18, "height": 18},
+        {"width": 18, "height": 18},
+        {"width": 18, "height": 18},
+        {"width": 18, "height": 18},
+        {"width": 18, "height": 18}
+    ]
+}

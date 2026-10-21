@@ -1,0 +1,36 @@
+PAC-MAN - 42 project
+====================
+
+START
+  Linux / macOS : ./play.sh        (or ./pac-man config.json)
+  Windows       : play.bat         (or pac-man.exe config.json)
+  The game always needs exactly one argument: a .json configuration file.
+
+CONTROLS
+  Arrows / WASD / ZQSD : move
+  ESC                  : pause / resume  (pause menu: QUIT and MENU buttons)
+  Main menu            : PLAY, highscores, exit
+  T (main menu)        : cheat console, type /help
+
+RULES
+  Eat every pacgum to clear the level, clear the 10 levels to win.
+  Super pacgums (in the corners) make the ghosts edible for a few seconds.
+  A ghost touching you, or the level timer reaching 0, costs a life.
+  At the end, type your name (max 10 letters, digits, spaces) to enter
+  the top 10.
+
+CHEATS (type them in the console, then ENTER)
+  /god_pac true|false        invincibility
+  /speed_up <1-100>          pacman speed
+  /game_more_life <n>        lives at the start of the game
+  /game_time <minutes>       time limit of each level
+  /level_skiper true|false   then press N in game to win the level
+  /dead_anim true|false      no death animation
+  /freeze_ghost true|false   ghosts stop moving
+
+CONFIGURATION
+  Edit config.json (JSON + # or // comments). Invalid values are replaced
+  by defaults with a warning in the terminal. Keys: highscore_filename,
+  lives, points_per_pacgum, points_per_super_pacgum, points_per_ghost,
+  seed, level_max_time, pacman_speed, ghost_speed, frightened_time,
+  ghost_respawn_time, levels [{"width", "height", "seed"?}, ...].
