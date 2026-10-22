@@ -50,6 +50,7 @@ class Parameter:
         self.levels: list[dict[str, int]] = conf["levels"]
         self.seed: int = conf["seed"]
         self.highscore_file: str = conf["highscore_filename"]
+        self.nb_pacgum: int = conf["pacgum"]
         self.pt_pacgum: int = conf["points_per_pacgum"]
         self.pt_super: int = conf["points_per_super_pacgum"]
         self.pt_ghost: int = conf["points_per_ghost"]

@@ -333,7 +333,6 @@ CORNER_BOTTOM_RIGHT = 5
 CORNER_TOP_RIGHT = 6
 PAC_START = -1
 GHOST_STARTS = (-2, -3, -4, -5)
-SUPER_PACGUM = -6
 
 _NORTH, _EAST, _SOUTH, _WEST = 1, 2, 4, 8
 _FULL_CELL = 15
@@ -365,28 +364,6 @@ def _validate(maze: list[list[int]]) -> tuple[int, int]:
             if not isinstance(cell, int) or not 0 <= cell <= _FULL_CELL:
                 raise MazeError(f"invalid maze cell value: {cell!r}")
     return width, len(maze)
-
-
-def _place_super_pellets(grid: list[list[int]],
-                         ghost_tiles: list[tuple[int, int]],
-                         center: tuple[int, int]) -> None:
-    """Put one super pellet on a free tile next to each ghost start.
-
-    Among the free neighbours of a ghost, the closest to the map centre wins.
-    """
-    for gx, gy in ghost_tiles:
-        best: tuple[int, int, int] | None = None
-        for dx, dy in ((0, -1), (1, 0), (0, 1), (-1, 0)):
-            x, y = gx + dx, gy + dy
-            if not (0 <= y < len(grid) and 0 <= x < len(grid[0])):
-                continue
-            if grid[y][x] != CORRIDOR:
-                continue
-            d = (x - center[0]) ** 2 + (y - center[1]) ** 2
-            if best is None or (d, y, x) < best:
-                best = (d, y, x)
-        if best is not None:
-            grid[best[1]][best[2]] = SUPER_PACGUM
 
 
 def _is_closed(maze: list[list[int]], x: int, y: int) -> bool:
@@ -520,14 +497,10 @@ def convert_maze(maze: list[list[int]]) -> list[list[int]]:
     grid[2 * pac[1] + 1][2 * pac[0] + 1] = PAC_START
     corners = [(0, 0), (width - 1, 0), (0, height - 1),
                (width - 1, height - 1)]
-    ghost_tiles: list[tuple[int, int]] = []
     for value, corner in zip(GHOST_STARTS, corners):
         gx, gy = _nearest_free_cell(maze, (corner[0], corner[1]), used)
         used.add((gx, gy))
-        tile = (2 * gx + 1, 2 * gy + 1)
-        grid[tile[1]][tile[0]] = value
-        ghost_tiles.append(tile)
-    _place_super_pellets(grid, ghost_tiles, (width, height))
+        grid[2 * gy + 1][2 * gx + 1] = value
     return grid
 
 

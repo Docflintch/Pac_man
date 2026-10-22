@@ -32,6 +32,7 @@ DEFAULT_LEVEL: dict[str, int] = {"width": 18, "height": 18}
 # key: (default, min, max)
 NUMBERS: dict[str, tuple[float, float, float]] = {
     "lives": (3, 1, 99),
+    "pacgum": (42, 0, 100000),
     "points_per_pacgum": (10, 0, 100000),
     "points_per_super_pacgum": (50, 0, 100000),
     "points_per_ghost": (200, 0, 100000),
@@ -42,7 +43,7 @@ NUMBERS: dict[str, tuple[float, float, float]] = {
     "frightened_time": (7, 1, 60),
     "ghost_respawn_time": (5, 1, 60),
 }
-INT_KEYS = ("lives", "points_per_pacgum", "points_per_super_pacgum",
+INT_KEYS = ("lives", "pacgum", "points_per_pacgum", "points_per_super_pacgum",
             "points_per_ghost", "seed", "level_max_time")
 LEVEL_LIMITS: dict[str, tuple[int, int]] = {"width": (8, 30),
                                             "height": (8, 30)}

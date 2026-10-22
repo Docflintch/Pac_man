@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by enchueco.*
+*This project has been created as part of the 42 curriculum by enchueco, lomoyne-.*
 
 # Pac-Man — Ghosts! More ghosts!
 
@@ -18,7 +18,8 @@ Features:
 - main menu (play, highscores, instructions, exit) with an animated preview;
 - 10 levels (configurable), the first one with a fixed seed, then random;
 - 4 ghosts, one per corner, each with its own personality (see *Implementation*);
-- pacgums everywhere, 4 super-pacgums near the corners that make ghosts edible;
+- `pacgum` pacgums spread over the corridors, 4 super-pacgums in the corners
+  (on the ghost starts) that make ghosts edible;
 - eaten ghosts respawn in their corner after a few seconds;
 - level timer, lives, score, level and remaining time always visible;
 - pause menu (resume / back to menu / quit);
@@ -88,6 +89,7 @@ on stderr, then the game continues.
 | --- | --- | --- | --- |
 | `highscore_filename` | `"scores_board.json"` | non-empty string | highscore file, relative to the config file |
 | `lives` | `3` | 1 – 99 | lives at the start |
+| `pacgum` | `42` | 0 – 100000 | pacgums per level (capped to the free corridors) |
 | `points_per_pacgum` | `10` | 0 – 100000 | |
 | `points_per_super_pacgum` | `50` | 0 – 100000 | |
 | `points_per_ghost` | `200` | 0 – 100000 | |
@@ -140,8 +142,9 @@ MazeGenerator(size=(width, height), perfect=False, seed=seed).maze
 3. each wall tile gets a sprite (vertical, horizontal or one of the 4 corners)
    from its neighbours;
 4. Pac-Man starts on the free cell nearest the centre, each ghost on the free
-   cell nearest a corner, a super-pacgum is placed next to each ghost;
-5. every corridor reachable from Pac-Man gets a pacgum.
+   cell nearest a corner;
+5. a super-pacgum is placed on each ghost start, then `pacgum` pacgums are
+   spread evenly over the corridors reachable from Pac-Man.
 
 `PERFECT=False` makes loops, so there are no dead ends. Level 1 uses the
 config `seed`, the other levels a random one. Any exception of the generator
@@ -228,9 +231,7 @@ butler push dist/pac-man-Darwin.zip <itch-user>/pac-man:mac
 
 An AI assistant (Claude) was used to:
 
-- finish the game logic on top of the existing code: super-pacgums and
-  edible/eaten ghosts, level timer, level progression and victory, game over /
-  victory screen with name entry;
+- finish the game logic on top of the existing code: level timer, level progression and victory, game over;
 - write the configuration loader (`src/config.py`) and the highscore
   load/save functions;
 - add type hints and docstrings so the code passes `flake8` and `mypy`;

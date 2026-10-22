@@ -1110,16 +1110,14 @@ class Game(Screen):
 
         # recharbel grid pos
         rgp = reachable_cells(self.map, spawn)
+        free: list[tuple[int, int]] = []  # corridors that can hold a pacgum
 
         for y in range(len(self.map)):  # map builder
             for x in range(len(self.map[y])):
                 sp_type = self.map[y][x] - 1
                 if sp_type < 0:
                     if sp_type == -1 and (x, y) in rgp:
-                        gum_sp = all_sp["obj"]["Pacgum"][0]
-                        self.pac_gum.append(Pac_gum(gum_sp, (x, y),
-                                                    self.para))
-                        self.nb_pac_gum += 1
+                        free.append((x, y))
                     elif sp_type == -1:
                         continue
                     elif sp_type == -2:
@@ -1132,7 +1130,7 @@ class Game(Screen):
                         self.ghost.append(Enemy(self.para.ghost_speed,
                                                 all_sp["ghost"][gt], (x, y),
                                                 self.para, GHOST_PROFILES[gt]))
-                    elif sp_type == -7:  # super pacgum
+                        # super pacgum on the ghost start (corner)
                         gum_sp = all_sp["obj"]["Super_Pacgum"][0]
                         gum = Pac_gum(gum_sp, (x, y), self.para,
                                       state="Super")
@@ -1146,6 +1144,14 @@ class Game(Screen):
                 self.sp["map"][4].append([])
                 self.sp["map"][5].append([])
                 self.sp["map"][7].append(self.map[y][x])
+
+        # as many pacgums as the config asks, spread over the corridors
+        nb = min(self.para.nb_pacgum, len(free))
+        gum_sp = all_sp["obj"]["Pacgum"][0]
+        for i in range(nb):
+            self.pac_gum.append(Pac_gum(gum_sp, free[i * len(free) // nb],
+                                        self.para))
+            self.nb_pac_gum += 1
 
         if self.player is not None:
             self.player.map = self.map

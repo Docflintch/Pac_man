@@ -31,6 +31,6 @@ CHEATS (type them in the console, then ENTER)
 CONFIGURATION
   Edit config.json (JSON + # or // comments). Invalid values are replaced
   by defaults with a warning in the terminal. Keys: highscore_filename,
-  lives, points_per_pacgum, points_per_super_pacgum, points_per_ghost,
-  seed, level_max_time, pacman_speed, ghost_speed, frightened_time,
-  ghost_respawn_time, levels [{"width", "height", "seed"?}, ...].
+  lives, pacgum, points_per_pacgum, points_per_super_pacgum,
+  points_per_ghost, seed, level_max_time, pacman_speed, ghost_speed,
+  frightened_time, ghost_respawn_time, levels [{"width", "height", "seed"?}, ...].

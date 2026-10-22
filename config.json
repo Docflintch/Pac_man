@@ -8,6 +8,10 @@
     # lives at the start of the game (1..99)
     "lives": 3,
 
+    # number of pacgums in each level (0..100000), the 4 super pacgums
+    # are added on the ghost starts
+    "pacgum": 200,
+
     # points (0..100000)
     "points_per_pacgum": 10,
     "points_per_super_pacgum": 50,
@@ -17,11 +21,11 @@
     "seed": 42,
 
     # time limit of each level in seconds (10..3600)
-    "level_max_time": 90,
+    "level_max_time": 300,
 
     // speeds in tiles per second (1..100)
     "pacman_speed": 10,
-    "ghost_speed": 7.5,
+    "ghost_speed": 8.5,
 
     /* seconds the ghosts stay edible after a super pacgum,
        and seconds before an eaten ghost comes back in its corner */
